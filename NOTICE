@@ -1,0 +1,26 @@
+nemotron-image-mlx
+Copyright (c) 2026 Felix Brener (VisualInference)
+
+An MLX implementation for running NVIDIA's Nemotron-Labs-Image-30B-A3B on Apple Silicon. Distributed under the
+NVIDIA License in LICENSE (non-commercial: research or evaluation only), the license of the model it ports.
+
+Derived files
+-------------
+nemotron_image_mlx/vq.py
+  MLX re-implementation of NVIDIA's L24SQ image tokenizer (modeling_l24sq_vit.py,
+  Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES, NVIDIA License).
+
+nemotron_image_mlx/model.py, nemotron_image_mlx/prompt.py
+  MLX re-implementation of NemotronH and of the Unitron lazy-vision tokenizer behaviour, following
+  modeling_nemotron_h.py (Copyright 2024 HuggingFace Inc. team; Copyright (c) 2025 NVIDIA CORPORATION; Apache-2.0)
+  and tokenization_unitron_lazy_vision.py (Copyright (c) 2026 NVIDIA CORPORATION; Apache-2.0), and the numerics of
+  vLLM (Apache-2.0). The Apache License, Version 2.0 applies to the portions derived from those files.
+
+scripts/shims/nemotron_ref/
+  Copies of modeling_nemotron_h.py and configuration_nemotron_h.py (Apache-2.0, notices retained) with the CUDA
+  stream context made a no-op, used only as a CPU reference in validation.
+
+scripts/shims/mamba_ssm/ops/triton/layernorm_gated.py
+  The reference function rms_norm_ref from mamba_ssm (Apache-2.0, Tri Dao and Albert Gu).
+
+Model weights are not included; they are distributed separately on Hugging Face under the NVIDIA License.

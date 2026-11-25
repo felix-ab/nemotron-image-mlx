@@ -1,0 +1,38 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "nemotron-image-mlx"
+version = "0.1.0"
+description = "NVIDIA's Nemotron-Labs-Image-30B-A3B (autoregressive Mamba2/MoE image generator) on Apple Silicon with MLX"
+readme = "README.md"
+requires-python = ">=3.10"
+license = "LicenseRef-NVIDIA-License"
+license-files = ["LICENSE", "NOTICE"]
+authors = [{ name = "Felix Brener" }]
+keywords = ["mlx", "apple-silicon", "text-to-image", "autoregressive", "nemotron", "mamba", "moe"]
+classifiers = [
+  "Operating System :: MacOS",
+  "Programming Language :: Python :: 3",
+  "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = ["mlx>=0.32.5", "mlx-lm>=0.32.2", "numpy", "pillow", "safetensors", "tokenizers", "jinja2", "huggingface_hub", "httpx"]
+
+[project.optional-dependencies]
+test = ["pytest>=8"]
+
+[project.urls]
+Homepage = "https://github.com/felix-ab/nemotron-image-mlx"
+Weights = "https://huggingface.co/VisualInference/Nemotron-Labs-Image-30B-A3B-MLX-8bit"
+Upstream = "https://huggingface.co/nvidia/Nemotron-Labs-Image-30B-A3B"
+
+[project.scripts]
+nemotron-image = "nemotron_image_mlx.cli:main"
+nemotron-image-convert = "nemotron_image_mlx.convert:main"
+
+[tool.setuptools]
+packages = ["nemotron_image_mlx"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
